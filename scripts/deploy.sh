@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-APP_NAME="${PM2_APP_NAME:-chootistoys-backend}"
+APP_NAME="${PM2_APP_NAME:-ansartraders-backend}"
 
 echo "[deploy] Working directory: $ROOT"
 

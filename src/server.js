@@ -82,7 +82,7 @@ async function start() {
 
   app.listen(PORT, () => {
     const publicUrl = (process.env.BACKEND_URL || `http://localhost:${PORT}`).replace(/\/$/, '');
-    console.log(`City Cycle Stores API listening on port ${PORT}`);
+    console.log(`AnsarTraders API listening on port ${PORT}`);
     console.log(`Public URL: ${publicUrl}`);
   });
 }

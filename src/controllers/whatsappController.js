@@ -31,7 +31,7 @@ function buildCustomerMessage(orderId, lineItems, total, senderName, senderPhone
     return `${index + 1}. ${itemLabel(item)}\n    ${item.quantity} x ${formatRs(item.price)} = ${formatRs(item.price * item.quantity)}`;
   });
   return [
-    '*City Cycle Stores - Order Request*',
+    '*AnsarTraders - Order Request*',
     '',
     `*Order ID:* #${orderId}`,
     `*Customer:* ${senderName}`,
@@ -54,7 +54,7 @@ function buildSellerMessage(orderId, lineItems, total, senderName, senderPhone, 
     return `${index + 1}. ${itemLabel(item)}\n    ${item.quantity} x ${formatRs(item.price)} (cost) = ${formatRs(item.price * item.quantity)}`;
   });
   return [
-    '*City Cycle Stores - Seller Order*',
+    '*AnsarTraders - Seller Order*',
     '',
     `*Order ID:* #${orderId}`,
     `*Seller:* ${senderName}`,
@@ -75,7 +75,7 @@ function buildSellerMessage(orderId, lineItems, total, senderName, senderPhone, 
 // themselves (see authController.applySeller), same as order requests.
 function buildSellerApplicationMessage(fullName, email, mobile) {
   return [
-    '*City Cycle Stores - Seller Application*',
+    '*AnsarTraders - Seller Application*',
     '',
     `*Name:* ${fullName}`,
     `*Email:* ${email}`,

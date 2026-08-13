@@ -1,4 +1,4 @@
--- Chootistoys seed data: 10 categories, 5 subcategories each, 5 products each subcategory
+-- AnsarTraders seed data: 10 categories, 5 subcategories each, 5 products each subcategory
 -- 25 products per category, 250 products total. No image data (image columns left NULL).
 
 SET FOREIGN_KEY_CHECKS = 0;

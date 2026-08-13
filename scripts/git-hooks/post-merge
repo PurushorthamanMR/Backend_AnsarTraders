@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel)"
 cd "$ROOT"
 
-APP_NAME="${PM2_APP_NAME:-chootistoys-backend}"
+APP_NAME="${PM2_APP_NAME:-ansartraders-backend}"
 
 echo "[post-merge] Installing deps..."
 npm install --omit=dev
