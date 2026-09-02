@@ -318,7 +318,30 @@ async function createSale(req, res) {
       const lineItems = [];
       for (const item of items) {
         const qty = Number(item.quantity);
-        if (!item.product_id || !qty || qty <= 0) {
+        if (!qty || qty <= 0) {
+          await connection.rollback();
+          return res.status(400).json({ message: 'Invalid item in sale' });
+        }
+
+        if (item.custom) {
+          const unitPrice = Number(item.price);
+          const name = String(item.name || '').trim();
+          if (!name || !Number.isFinite(unitPrice) || unitPrice < 0) {
+            await connection.rollback();
+            return res.status(400).json({ message: 'Invalid custom item in sale' });
+          }
+          subtotal += unitPrice * qty;
+          lineItems.push({
+            product_id: null,
+            product_name: name,
+            product_code: null,
+            price: unitPrice,
+            quantity: qty,
+          });
+          continue;
+        }
+
+        if (!item.product_id) {
           await connection.rollback();
           return res.status(400).json({ message: 'Invalid item in sale' });
         }
@@ -375,10 +398,12 @@ async function createSale(req, res) {
           `INSERT INTO sale_items (sale_id, product_id, product_name, product_code, price, quantity) VALUES (?, ?, ?, ?, ?, ?)`,
           [saleResult.insertId, item.product_id, item.product_name, item.product_code, item.price, item.quantity]
         );
-        await connection.query('UPDATE products SET stock = stock - ? WHERE id = ?', [
-          item.quantity,
-          item.product_id,
-        ]);
+        if (item.product_id) {
+          await connection.query('UPDATE products SET stock = stock - ? WHERE id = ?', [
+            item.quantity,
+            item.product_id,
+          ]);
+        }
       }
 
       if (amountPaid > 0) {
